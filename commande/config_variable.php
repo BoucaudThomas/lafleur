@@ -3,6 +3,7 @@
 
     // nom de la table de la base de données
     $db_table = "produit";
+    $db_table_commande = "commande";
 
     // Panier.php
     $page_panier_titre_col1 = "Références";

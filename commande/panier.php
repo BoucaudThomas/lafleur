@@ -31,7 +31,7 @@
                 </tr>
             </thead>
 
-                    <form action="commander.php" methode="POST">
+                    <form action="commander.php?id=<?php echo($col['id']);?>&action=commander" methode="POST">
                     <tr>
                         <td scope="row" name="id">
                             <?php if($_GET['action'] == "ajouter"){ ?><?php echo($col['id']); ?><?php }?>
@@ -53,7 +53,8 @@
         </table>
 
         <div style="float:left">
-            <button type="submit" class="btn btn-primary" name="action" value="commander">Commander</button> 
+            <!-- <button type="submit" class="btn btn-primary" name="action" value="commander">Commander</button>-->
+            <a class="btn btn-primary" href="../commande/commander.php?id=<?php echo($col['id']);?>&action=commander">Commander</a>
             <button type="submit" class="btn btn-warning toastrDefaultWarning" name="action" value="annuler">Annuler</button>
         </div>
         </form>
