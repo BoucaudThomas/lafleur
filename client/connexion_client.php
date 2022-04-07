@@ -1,45 +1,44 @@
 <?php
-session_start(); 
-include("header.php")
+	session_start(); 
+	include("../include/header.php");
 ?>
-<div class="container" id="content">
-	<table class="center" id="connect-table">
-		<tr>
-	      <td class="content"><form action="connect_client.php" method="post">
-     <h2 class="inscript">Connexion</h2>
-		  <table class="table" id="tab_connect">
-			  <tbody>
-			  		<tr>
-					  <th scope="row">Identifiant: </th>
-					  <td><input type="text" name="identifiant" value="" /></td>
-					</tr>
-					<tr>
-						<th scope="row">Mot de Passe:</th>
-						<td><input type="password" name="mot_de_passe" value="" /></td>
-					</tr>
-					<tr><td></td><td><input type="submit" name="connexion" value="connexion" /></td></tr>
-					<label>Si vous n'avez pas de compte, veuillez vous <a href="inscription_client.php">inscrire.</a></label>
-			  </tbody>
-		  </table>
-</form>
+	<div class="container" id="content">
+		<div class="container">
+			<form action="connect_client.php" method="POST">
+				<h2 class="inscript">Connexion</h2>
+				<div style="margin: auto;">
+					<div class="form-group" style="float: block;">
+						<label for="">Identifiant:</label>
+						<input class="form-control" type="text" name="identifiant" value="">
+					</div>
+					<div class="form-group">
+						<label for="">Mot de passe:</label>
+						<input class="form-control" type="password" name="mot_de_passe" value="">
+					</div>
+				</div>
+					<input class="btn btn-primary" type="submit" name="action" value="connexion">
+					<p style="text-align: right;">Si vous n'avez pas de compte, veuillez vous <a href="inscription_client.php"> inscrire.</a></p>
+					<br>
+			</form>
+		</div>
+	</div>
 <?php
-include("connect_db.php");
-	if (isset($_POST['connexion'])) {
+include("../connect_db.php");
+	if (isset($_POST['action'])) {
 		$identifiant = $_POST['identifiant'];
 		$mot_de_passe = $_POST['mot_de_passe'];
 
-			$query = $db->prepare($sql = "SELECT * FROM client WHERE email='".$identifiant."' and mot_de_passe='".$mot_de_passe."'");
+			$query = $db->prepare($sql = "SELECT * FROM client WHERE email='$identifiant' AND mot_de_passe='$mot_de_passe'");
 			$query->execute();
 
 				$_SESSION['identifiant'] = $identifiant;
 									}	
 	else{
-	  	 "Le nom d'utilisateur ou le mot de passe est incorrect.";
+	  	 echo("");
 		}
-include("deconnect_db.php");
+//include("deconnect_db.php");
 ?>
-	   </tr>
-	</table>
+
 <?php
-include("footer.php");
+include("../include/footer.php");
 ?>

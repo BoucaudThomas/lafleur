@@ -1,50 +1,75 @@
 <?php
 session_start(); 
 //formulaire d'inscription php
-	include("header.php"); ?>
-	<table class="center">
-		<tr>
-	      <td class="content"><form action="envoi.php" method="post">
-     <p class="inscript">Inscription</p>
-		  <table>
-			<tr><td> Identifiant(email): </td><td><input type="text" name="identifiant" value="" required /></td></tr>
-			<tr><td> Mot de Passe: </td><td><input type="password" name="mot_de_passe" value="" required /></td></tr>
-			<tr><td> Nom: </td><td><input type="text" name="nom" value="" required /></td></tr>
-			<tr><td> Prenom: </td><td><input type="text" name="prenom" value="" required /></td></tr>
-			<tr><td> Rue: </td><td><input type="text" name="rue" value="" required /></td></tr>
-			<tr><td> Ville: </td><td><input type="text" name="ville" value="" required /></td></tr>
-			<tr><td> Code Postal: </td><td><input type="text" name="cp" value="" required /></td></tr>
-			<tr><td> Téléphone: </td><td><input type="text" name="tel" value="" required /></td></tr>
-			<tr><td> Mobile: </td><td><input type="text" name="mob" value="" required /></td></tr>
-			<tr><td></td><td><input type="submit" name="Inscription" value="valider" /></td></tr>
-			<tr><td></td><td><input type="submit" name="reset" value="annuler" /></td></tr>
-		  </table>
-</form>
+	include("../include/header.php");
+?>
+
+<div class="container" id="content">
+		<div class="container">
+			<form action="create_user.php" method="POST">
+				<h2 class="inscript">Inscription</h2>
+				<div class="card-body" style="display: block; float:middle; margin:auto; width:500px;">
+					<div class="form-group" style="float: block;">
+						<label for="">Identifiant:</label>
+						<input class="form-control" type="text" name="identifiant" value="">
+					</div>
+					<div class="form-group" style="float: block;">
+						<label for="">Mot de passe:</label>
+						<input class="form-control" type="password" name="mot_de_passe" value="">
+					</div>
+					<div class="form-group" style="float: block;">
+						<label for="">Nom:</label>
+						<input class="form-control" type="text" name="nom" value="">
+					</div>
+					<div class="form-group" style="float: block;">
+						<label for="">Prenom:</label>
+						<input class="form-control" type="text" name="prenom" value="">
+					</div>
+					<div class="form-group" style="float: block;">
+						<label for="">Adresse:</label>
+						<input class="form-control" type="text" name="adresse" value="">
+					</div>
+					<div class="form-group">
+						<label for="">Ville:</label>
+						<input class="form-control" type="text" name="ville" value="">
+					</div>
+					<div class="form-group">
+						<label for="">Code Postal:</label>
+						<input class="form-control" type="number" name="code_postal" value="">
+					</div>
+					<div class="form-group">
+						<label for="">Téléphone:</label>
+						<input class="form-control" type="number" name="telephone" value="">
+					</div>
+				</div>
+					<input class="btn btn-primary" type="submit" name="inscription" value="inscription">
+					<p style="text-align: right;">Si vous avez deja un compte, veuillez vous <a href="connexion_client.php"> connectez.</a></p>
+					<br>
+			</form>
+		</div>
+	</div>
+
         <?php
-        if (isset ($_POST['Inscription'])){
+        if (isset ($_POST['inscription'])){
             //récupération des données client
             $identifiant=$_POST['identifiant'];
             $mot_de_passe=$_POST['mot_de_passe'];
             $nom=$_POST['nom'];
 			$prenom=$_POST['prenom'];
-            $rue=$_POST['rue'];
+            $adresse=$_POST['adresse'];
             $ville=$_POST['ville'];
-			$cp=$_POST['cp'];
-            $tel=$_POST['tel'];
-            $mob=$_POST['mob'];
+			$code_postal=$_POST['code_postal'];
+            $tel=$_POST['telephone'];
             //connexion à la base de donnée
-            include("connect_db.php");
+            include("../connect_db.php");
             //script sql d'insertion
-            $sql = "INSERT INTO client VALUES ('".$identifiant."','".$nom."','".$prenom."','".$rue."','".$ville."','".$cp."','".$tel."','".$mob."','".$mot_de_passe."')";
-            $statement = $db->query($sql); 
+            $sql = "INSERT INTO client VALUES ('$identifiant','$nom','$prenom','$adresse','$ville',$code_postal,'$telephone','$mot_de_passe')";
+            $query = $db->prepare($sql);
+			$query->execute(); 
 				echo "Votre compte a été crée avec succes.";
-            //déconnexion à la base de donnée
-            include("deconnect_db.php");
         }
         ?>
-	   </tr>
-	</table>
 
 	<?php
-include("footer.php");
+include("../include/footer.php");
 ?>
