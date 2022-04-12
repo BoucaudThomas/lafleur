@@ -88,8 +88,8 @@
     <!-- fin message d'alerte -->
                     <div style="float:right;">
                         <form method="GET">
-                        <input class="form-control form-control-sm" type="search" name="q" placeholder="Recherche..." />&nbsp;<input class="btn btn-block btn-secondary btn-sm w-70" type="submit" value="Rechercher" />
-                        
+                            <input class="form-control form-control-sm" type="search" name="q" placeholder="Recherche..." />
+                            <input style="width: 100px; float: right;" class="btn btn-block btn-secondary btn-sm" type="submit" value="Rechercher" />
                         </form>
                     </div>   
 
@@ -157,7 +157,7 @@
                                                 //affichage des images
                                                 echo($col['image']); 
                                             ?>>
-                                        </td>i
+                                        </td>
                                 </tr>
                        <?php
                        //accolade de fin de boucle
